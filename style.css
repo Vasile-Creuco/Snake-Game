@@ -1,0 +1,19 @@
+body {
+    text-align: center;
+}
+
+h2 {
+    color: forestgreen;
+}
+
+#table {
+    border: 10px solid darkgreen;
+}
+
+button {
+    width: 90px;
+    height: 40px;
+    background: limegreen;
+
+    font-size: 20px;
+}
