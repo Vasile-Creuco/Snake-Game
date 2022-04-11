@@ -1,26 +1,26 @@
-var blockSize = 25;
-var rows = 20;
-var columns = 20;
-var table;
-var context;
+let blockSize = 25;
+let rows = 20;
+let columns = 20;
+let table;
+let context;
 
 //snake head
-var snakeX = blockSize * 5;
-var snakeY = blockSize * 5;
+let snakeX = blockSize * 5;
+let snakeY = blockSize * 5;
 
 //moves count
-var movementX = 0;
-var movementY = 0;
+let movementX = 0;
+let movementY = 0;
 
-var snake = [];
+let snake = [];
 
 //food for snake
-var foodX;
-var foodY;
+let foodX;
+let foodY;
 
-var score = 0;
+let score = 0;
 
-var gameOver = false;
+let gameOver = false;
 
 window.onload = function () {
     table = document.getElementById("table");
@@ -48,6 +48,19 @@ function displayTable() {
     context.fillStyle = "red";
     context.fillRect(foodX, foodY, blockSize, blockSize);
 
+    eatFood();
+
+    context.fillStyle = "darkblue";
+    snakeX += movementX * blockSize;
+    snakeY += movementY * blockSize;
+    context.fillRect(snakeX, snakeY, blockSize, blockSize);
+    for (let s = 0; s < snake.length; ++s) {
+        context.fillRect(snake[s][0], snake[s][1], blockSize, blockSize);
+    }
+    checkBuffer();
+}
+
+function eatFood() {
     if (snakeX == foodX && snakeY == foodY) {
         snake.push([foodX, foodY]);
         ++score;
@@ -61,16 +74,9 @@ function displayTable() {
     if (snake.length) {
         snake[0] = [snakeX, snakeY];
     }
+}
 
-    context.fillStyle = "darkblue";
-    snakeX += movementX * blockSize;
-    snakeY += movementY * blockSize;
-    context.fillRect(snakeX, snakeY, blockSize, blockSize);
-    for (let s = 0; s < snake.length; ++s) {
-        context.fillRect(snake[s][0], snake[s][1], blockSize, blockSize);
-    }
-
-    //game over condition
+function checkBuffer() {
     if (snakeX < 0 || snakeX > columns * blockSize || snakeY < 0 || snakeY > rows * blockSize) {
         gameOver = true;
         document.getElementById('score-count').innerText = "Game Over";
