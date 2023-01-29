@@ -106,7 +106,7 @@ function changeDirection(e) {
         movementY = 0;
     }
 }
-
+//set apple random in the table
 function placeFood() {
     foodX = Math.floor(Math.random() * columns) * blockSize;
     foodY = Math.floor(Math.random() * rows) * blockSize;
